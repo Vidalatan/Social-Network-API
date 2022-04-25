@@ -1,7 +1,6 @@
 const { Schema, model } = require('mongoose');
 const thoughtsSchema = require('./Thought')
 
-// Schema to create Student model
 const userSchema = new Schema(
   {
     username: {
@@ -14,11 +13,7 @@ const userSchema = new Schema(
       type: String,
       unique: true,
       required: true,
-      validate: {
-        validator: function(v) {
-          return /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/.test(v);
-        }
-      }
+      match: /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/
     },
     thoughts: [thoughtsSchema],
     friends: [this]
@@ -26,6 +21,7 @@ const userSchema = new Schema(
   {
     toJSON: {
       getters: true,
+      virtuals: true
     },
   }
 );
@@ -36,6 +32,6 @@ userSchema.virtual('friendCount').get(
   }
 )
 
-const Student = model('users', userSchema);
+const User = model('users', userSchema);
 
-module.exports = Student;
+module.exports = User;
