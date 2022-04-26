@@ -3,34 +3,81 @@ const { User, Thought } = require('../models')
 
 /* ===================+============== User Section ===================================== */
 
-function getUsers(req, res) {
-
+async function getUsers(req, res) {
+  try {
+    const allUsers = await User.find()
+    return res.json(allUsers)
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json(err)
+  }
 }
 
-function createUser(req, res) {
-
+async function createUser(req, res) {
+  try {
+    const newUser = await User.create(req.body)
+    return res.json(newUser)
+  } catch (err) {
+    return res.status(500).json(err)
+  }
 }
 
-function getUserById(req, res) {
-
+async function getUserById(req, res) {
+  try {
+    const user = await User.findById(
+      { _id: req.params.userId},
+      [{username: req.body.username}, {email: req.body.email}]
+    )
+    return res.json(user)
+  } catch (err) {
+    return res.status(500).json(err)
+  }
 }
 
-function updateUserById(req, res) {
-
+async function updateUserById(req, res) {
+  try {
+    const updUser = await User.updateOne(req.params.userId)
+    return res.json(updUser)
+  } catch (err) {
+    return res.status(500).json(err)
+  }
 }
 
-function deleteUserById(req, res) {
-
+async function deleteUserById(req, res) {
+  try {
+    const delUser = await User.deleteOne({ _id: req.params.userId})
+    return res.json(delUser)
+  } catch (err) {
+    return res.status(500).json(err)
+  }
 }
 
 /* ===================+============== Friend Section ===================================== */
 
-function addFriendById(req, res) {
-
+async function addFriendById(req, res) {
+  try {
+    const updUser = await User.findByIdAndUpdate(
+      { _id: req.params.userId },
+      { $addToSet: { friends: req.params.friendId } },
+      { new: true }
+    )
+    return res.json(updUser)
+  } catch (err) {
+    return res.status(500).json(err)
+  }
 }
 
-function deleteFriendById(req, res) {
-
+async function deleteFriendById(req, res) {
+  try {
+    const updUser = await User.findByIdAndUpdate(
+      { _id: req.params.userId },
+      { $pull: { friends: req.params.friendId } },
+      { new: true }
+    )
+    return res.json(updUser)
+  } catch (err) {
+    return res.status(500).json(err)
+  }
 }
 
 // Export all functions
