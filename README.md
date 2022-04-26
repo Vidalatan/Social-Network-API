@@ -86,16 +86,28 @@ A light-weight Mongo based API. Made as a proof of concept for using MongoDB wit
 ## [Tests](#tests)
 
 Video demonstrating retrieving all or single users, creating users, updating users, and deleting users
-==Video of Users==
+
+https://user-images.githubusercontent.com/59946423/165375317-af1e9f09-8d3a-4c64-9a6b-eb43e5f54065.mp4
+
+
 
 Video demonstrating adding and removing friend ids from users
-==Video of Friends==
+
+https://user-images.githubusercontent.com/59946423/165375344-062d0a99-5232-4fa3-85f4-dc850f405b92.mp4
+
+
 
 Video demonstrating retrieving all or single thoughts, creating thoughts, updating thoughts, and deleting thoughts. Including their cascading effect on users.
-==Video of Thoughts==
+
+https://user-images.githubusercontent.com/59946423/165375369-535c7371-0283-40ad-81e6-90c2e722fcf4.mp4
+
+
 
 Video demonstrating adding and removing reactions to thoughts. Including their cascading effect on users and thoughts.
-==Video of Reactions==
+
+https://user-images.githubusercontent.com/59946423/165375394-13495c5d-dc28-4891-a518-64b6ada56ef5.mp4
+
+
 
 Here is the link to the full video:
 [https://drive.google.com/file/d/1-pNGmY_fzMNMTDQiLXEAUdNipG6ZQVjK/view?usp=sharing](https://drive.google.com/file/d/1-pNGmY_fzMNMTDQiLXEAUdNipG6ZQVjK/view?usp=sharing)
