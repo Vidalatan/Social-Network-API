@@ -10,6 +10,6 @@ router.route('/:thoughtId').get(C.getThoughtById).put(C.updateThoughtById).delet
 
 router.route('/:thoughtId/reactions').post(C.createReaction)
 
-router.route('/:thoughtId/reactions/:reactionId').delete(C.getReactionById)
+router.route('/:thoughtId/reactions/:reactionId').delete(C.deleteReactionById)
 
 module.exports = router;

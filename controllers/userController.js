@@ -24,10 +24,7 @@ async function createUser(req, res) {
 
 async function getUserById(req, res) {
   try {
-    const user = await User.findById(
-      { _id: req.params.userId},
-      [{username: req.body.username}, {email: req.body.email}]
-    )
+    const user = await User.findById(req.params.userId)
     return res.json(user)
   } catch (err) {
     return res.status(500).json(err)
@@ -36,7 +33,11 @@ async function getUserById(req, res) {
 
 async function updateUserById(req, res) {
   try {
-    const updUser = await User.updateOne(req.params.userId)
+    const updUser = await User.updateOne(
+      { _id: req.params.userId},
+      [{username: req.body.username}, {email: req.body.email}],
+      {runValidators: true, new: true}
+    )
     return res.json(updUser)
   } catch (err) {
     return res.status(500).json(err)
