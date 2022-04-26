@@ -1,7 +1,7 @@
 const { ObjectId } = require('mongoose').Types;
 const { User, Thought } = require('../models')
 
-/* ===================+============== User Section ===================================== */
+/* ===================+============== Thought Section ===================================== */
 
 async function getThoughts(req, res) {
   try {
@@ -43,7 +43,7 @@ async function updateThoughtById(req, res) {
   }
 }
 
-function deleteThoughtById(req, res) {
+async function deleteThoughtById(req, res) {
   try {
     const delThought = await Thought.deleteOne({ _id: req.params.thoughtId })
     return res.json(delThought)
@@ -56,20 +56,20 @@ function deleteThoughtById(req, res) {
 
 async function createReaction(req, res) {
   try {
-    const thought = await Thought.findById({ _id: req.params.thoughtId})
-    const test = await thought.reactions.push(req.body)
-    console.log("Test log: " + test);
+    const thought = await Thought.findByIdAndUpdate({ _id: req.params.thoughtId})
+    await thought.reactions.push(req.body)
+    await thought.save((err) => console.error(err))
     return res.json(thought)
   } catch (err) {
     res.status(500).json(err)
   }
 }
 
-function deleteReactionById(req, res) {
+async function deleteReactionById(req, res) {
   try {
     const thought = await Thought.findById({ _id: req.params.thoughtId})
-    const test = await thought.reactions.id(_id).remove()
-    console.log("Test log: " + test);
+    await thought.reactions.id(req.params.reactionId).remove()
+    await thought.save((err) => console.error(err))
     return res.json(thought)
   } catch (err) {
     res.status(500).json(err)

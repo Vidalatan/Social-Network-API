@@ -1,5 +1,30 @@
 const { Schema, model } = require('mongoose');
 
+const reactionSchema = new Schema(
+  {
+    // reactionId: {
+    //   type: Schema.Types.ObjectId,
+    //   default: () => new Types.ObjectId()     Excluding this because reactions already includes a unique Id
+    // },                                        If you wanted to include this, make sure to require 'Types' from mongoose
+    reactionBody: {
+      type: String,
+      required: true,
+      maxlength: 280
+    },
+    username: {
+      type: String,
+      required: true
+    },
+  },
+  {
+    toJSON: {
+      getters: true,
+      virtuals: true
+    },
+    timestamps: true
+  }
+);
+
 const thoughtSchema = new Schema(
   {
     thoughtText: {
@@ -29,31 +54,7 @@ thoughtSchema.virtual('reactionCount').get(
   }
 )
 
-const reactionSchema = new Schema(
-  {
-    reactionId: {
-      type: Schema.Types.ObjectId,
-      default: () => new Types.ObjectId
-    },
-    reactionBody: {
-      type: String,
-      required: true,
-      maxlength: 280
-    },
-    username: {
-      type: String,
-      required: true
-    },
-  },
-  {
-    toJSON: {
-      getters: true,
-      virtuals: true
-    },
-    timestamps: true
-  }
-);
 
 const Thought = model('thought', thoughtSchema);
 
-module.exports = Thought;
+module.exports = {thoughtSchema, Thought};

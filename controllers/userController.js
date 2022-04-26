@@ -35,11 +35,12 @@ async function updateUserById(req, res) {
   try {
     const updUser = await User.updateOne(
       { _id: req.params.userId},
-      [{username: req.body.username}, {email: req.body.email}],
+      req.body,
       {runValidators: true, new: true}
     )
     return res.json(updUser)
   } catch (err) {
+    console.error(err);
     return res.status(500).json(err)
   }
 }
